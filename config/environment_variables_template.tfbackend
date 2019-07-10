@@ -1,0 +1,7 @@
+
+# Create <name-of-environment>.tfbackend for every environment that You intend
+# to deploy from this template:
+
+"bucket" =
+"key"    = "terraform/Infrastructure/<name-of-environment>.tfstate"
+"region" = "eu-west-1"

@@ -1,0 +1,10 @@
+.terraform/
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+
+# environment variables
+config/*.tfvars
+config/*.tfbackend
+!config/environment_variables_template.tfvars
+!config/environment_variables_template.tfbackend
