@@ -29,7 +29,7 @@ resource "aws_db_instance" "db" {
   multi_az                = false
   db_subnet_group_name    = aws_db_subnet_group.private.name
 
-  final_snapshot_identifier = "main-postgres-final-snapshot-${md5(timestamp())}"
+  final_snapshot_identifier = "main-postgres-final-snapshot"
 
   depends_on = [
     random_password.db_password,
