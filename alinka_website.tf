@@ -33,13 +33,6 @@ resource "aws_route53_record" "soa_alinka_website" {
   ]
 }
 
-module alinka_website_mailing_identity {
-  source = "./mailing_identity"
-
-  domain       = "alinka.io"
-  route53_zone = aws_route53_zone.alinka_website
-}
-
 module alinka_website_ssl_certificate {
   source = "./ssl_certificate"
 
