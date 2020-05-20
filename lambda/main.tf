@@ -43,6 +43,7 @@ data "aws_iam_policy_document" "role" {
   version = "2012-10-17"
 
   statement {
+    sid = ""
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {

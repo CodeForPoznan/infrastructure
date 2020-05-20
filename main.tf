@@ -12,7 +12,7 @@ provider "aws" {
   profile = "codeforpoznan"
 }
 
-data "aws_iam_policy_document" "codeforpoznan_public_policy_document" {
+data "aws_iam_policy_document" "codeforpoznan_public_policy" {
   version = "2012-10-17"
 
   statement {
@@ -29,6 +29,10 @@ data "aws_iam_policy_document" "codeforpoznan_public_policy_document" {
   statement {
     sid       = "PublicGetObject"
     effect    = "Allow"
+    principals {
+      identifiers = ["*"]
+      type        = "*"
+    }
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::codeforpoznan-public/*"]
   }
@@ -43,7 +47,7 @@ resource "aws_s3_bucket" "codeforpoznan_public" {
     allowed_origins = ["*"]
   }
 
-  policy = data.aws_iam_policy_document.codeforpoznan_public_policy_document.json
+  policy = data.aws_iam_policy_document.codeforpoznan_public_policy.json
 }
 
 // shared private bucket for storing zipped projects and lambdas code
