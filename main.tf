@@ -27,8 +27,8 @@ data "aws_iam_policy_document" "codeforpoznan_public_policy" {
   }
 
   statement {
-    sid       = "PublicGetObject"
-    effect    = "Allow"
+    sid    = "PublicGetObject"
+    effect = "Allow"
     principals {
       identifiers = ["*"]
       type        = "*"
