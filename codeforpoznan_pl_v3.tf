@@ -10,7 +10,7 @@ module codeforpoznan_pl_v3_ssl_certificate {
   source = "./ssl_certificate"
 
   domain       = "dev.codeforpoznan.pl"
-  route53_zone = aws_route53_zone.codeforpoznan_pl
+  route53_zone = module.codeforpoznan_pl_route53_zone.zone
 }
 
 module codeforpoznan_pl_v3_frontend_assets {
@@ -27,7 +27,7 @@ module codeforpoznan_pl_v3_cloudfront_distribution {
   name            = "codeforpoznan.pl_v3"
   domain          = "dev.codeforpoznan.pl"
   s3_bucket       = aws_s3_bucket.codeforpoznan_public
-  route53_zone    = aws_route53_zone.codeforpoznan_pl
+  route53_zone    = module.codeforpoznan_pl_route53_zone.zone
   iam_user        = aws_iam_user.codeforpoznan_pl_v3
   acm_certificate = module.codeforpoznan_pl_v3_ssl_certificate.certificate
 

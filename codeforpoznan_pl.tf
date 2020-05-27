@@ -1,33 +1,12 @@
-resource "aws_route53_zone" "codeforpoznan_pl" {
-  name = "codeforpoznan.pl"
-}
+module codeforpoznan_pl_route53_zone {
+  source = "./route53_zone"
 
-resource "aws_route53_record" "ns_codeforpoznan_pl" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
-  name    = aws_route53_zone.codeforpoznan_pl.name
-  type    = "NS"
-  ttl     = "172800"
-  records = [
-    "${aws_route53_zone.codeforpoznan_pl.name_servers.0}.",
-    "${aws_route53_zone.codeforpoznan_pl.name_servers.1}.",
-    "${aws_route53_zone.codeforpoznan_pl.name_servers.2}.",
-    "${aws_route53_zone.codeforpoznan_pl.name_servers.3}.",
-  ]
-}
-
-resource "aws_route53_record" "soa_codeforpoznan_pl" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
-  name    = aws_route53_zone.codeforpoznan_pl.name
-  type    = "SOA"
-  ttl     = "900"
-  records = [
-    "ns-1211.awsdns-23.org. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400",
-  ]
+  domain = "codeforpoznan.pl"
 }
 
 resource "aws_route53_record" "mx_codeforpoznan_pl" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
-  name    = aws_route53_zone.codeforpoznan_pl.name
+  zone_id = module.codeforpoznan_pl_route53_zone.zone.zone_id
+  name    = module.codeforpoznan_pl_route53_zone.zone.name
   type    = "MX"
   ttl     = "300"
   records = [
@@ -40,8 +19,8 @@ resource "aws_route53_record" "mx_codeforpoznan_pl" {
 }
 
 resource "aws_route53_record" "txt_codeforpoznan_pl" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
-  name    = aws_route53_zone.codeforpoznan_pl.name
+  zone_id = module.codeforpoznan_pl_route53_zone.zone.zone_id
+  name    = module.codeforpoznan_pl_route53_zone.zone.name
   type    = "TXT"
   ttl     = "300"
   records = [
@@ -56,7 +35,7 @@ resource "aws_route53_record" "txt_codeforpoznan_pl" {
 
 # https://support.google.com/a/answer/174126
 resource "aws_route53_record" "dkim_google" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
+  zone_id = module.codeforpoznan_pl_route53_zone.zone.zone_id
   name    = "google._domainkey.codeforpoznan.pl"
   type    = "TXT"
   ttl     = "300"
@@ -67,7 +46,7 @@ resource "aws_route53_record" "dkim_google" {
 
 # https://support.google.com/a/answer/2466563
 resource "aws_route53_record" "dmarc" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
+  zone_id = module.codeforpoznan_pl_route53_zone.zone.zone_id
   name    = "_dmarc.codeforpoznan.pl"
   type    = "TXT"
   ttl     = "300"
@@ -76,13 +55,3 @@ resource "aws_route53_record" "dmarc" {
   ]
 }
 
-# That's not working properly right now, will be fixed in CodeForPoznan/Infrastructure#51
-resource "aws_route53_record" "www_codeforpoznan_pl" {
-  zone_id = aws_route53_zone.codeforpoznan_pl.zone_id
-  name    = "www.codeforpoznan.pl."
-  type    = "CNAME"
-  ttl     = "300"
-  records = [
-    "codeforpoznan.pl.",
-  ]
-}

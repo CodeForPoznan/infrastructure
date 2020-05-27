@@ -10,7 +10,7 @@ module dev_alinka_website_ssl_certificate {
   source = "./ssl_certificate"
 
   domain       = "dev.alinka.io"
-  route53_zone = aws_route53_zone.alinka_website
+  route53_zone = module.alinka_website_route53_zone.zone
 }
 
 module dev_alinka_website_frontend_assets {
@@ -27,7 +27,7 @@ module dev_alinka_website_cloudfront_distribution {
   name            = "dev_alinka_website"
   domain          = "dev.alinka.io"
   s3_bucket       = aws_s3_bucket.codeforpoznan_public
-  route53_zone    = aws_route53_zone.alinka_website
+  route53_zone    = module.alinka_website_route53_zone.zone
   iam_user        = aws_iam_user.dev_alinka_website
   acm_certificate = module.dev_alinka_website_ssl_certificate.certificate
 

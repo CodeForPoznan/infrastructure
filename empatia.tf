@@ -23,6 +23,7 @@ resource "aws_route53_record" "ns_empatia" {
   ]
 }
 
+# todo: move it to route53_zone record
 resource "aws_route53_record" "soa_empatia" {
   zone_id = aws_route53_zone.empatia.zone_id
   name    = aws_route53_zone.empatia.name

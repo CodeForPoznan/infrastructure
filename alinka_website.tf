@@ -6,38 +6,17 @@ resource "aws_iam_access_key" "alinka_website" {
   user = aws_iam_user.alinka_website.name
 }
 
-resource "aws_route53_zone" "alinka_website" {
-  name = "alinka.io"
-}
+module alinka_website_route53_zone {
+  source = "./route53_zone"
 
-resource "aws_route53_record" "ns_alinka_website" {
-  zone_id = aws_route53_zone.alinka_website.zone_id
-  name    = aws_route53_zone.alinka_website.name
-  type    = "NS"
-  ttl     = "172800"
-  records = [
-    "${aws_route53_zone.alinka_website.name_servers.0}.",
-    "${aws_route53_zone.alinka_website.name_servers.1}.",
-    "${aws_route53_zone.alinka_website.name_servers.2}.",
-    "${aws_route53_zone.alinka_website.name_servers.3}.",
-  ]
-}
-
-resource "aws_route53_record" "soa_alinka_website" {
-  zone_id = aws_route53_zone.alinka_website.zone_id
-  name    = aws_route53_zone.alinka_website.name
-  type    = "SOA"
-  ttl     = "900"
-  records = [
-    "ns-1143.awsdns-14.org. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400",
-  ]
+  domain = "alinka.io"
 }
 
 module alinka_website_ssl_certificate {
   source = "./ssl_certificate"
 
   domain       = "alinka.io"
-  route53_zone = aws_route53_zone.alinka_website
+  route53_zone = module.alinka_website_route53_zone.zone
 }
 
 module alinka_website_frontend_assets {
@@ -54,7 +33,7 @@ module alinka_website_cloudfront_distribution {
   name            = "alinka_website"
   domain          = "alinka.io"
   s3_bucket       = aws_s3_bucket.codeforpoznan_public
-  route53_zone    = aws_route53_zone.alinka_website
+  route53_zone    = module.alinka_website_route53_zone.zone
   iam_user        = aws_iam_user.alinka_website
   acm_certificate = module.alinka_website_ssl_certificate.certificate
 
