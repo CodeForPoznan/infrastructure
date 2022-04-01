@@ -4,7 +4,7 @@ name: lint
 on:
   pull_request:
     branches: [master]
-    paths: ['**.tf']
+    #paths: ['**.tf']
 
 
 jobs:
@@ -20,3 +20,4 @@ jobs:
           terraform_wrapper: false
 
       - run: terraform fmt -check -recursive -diff
+
