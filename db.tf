@@ -35,4 +35,10 @@ resource "aws_db_instance" "db" {
     random_password.db_password,
     aws_db_subnet_group.private,
   ]
+
+  lifecycle {
+    ignore_changes = [
+      latest_restorable_time
+    ]
+  }
 }
