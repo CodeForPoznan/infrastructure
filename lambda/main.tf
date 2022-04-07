@@ -164,4 +164,5 @@ resource "aws_iam_user_policy_attachment" "user_policy_attachment" {
 
 output "function" {
   value = aws_lambda_function.function
+  sensitive = true
 }

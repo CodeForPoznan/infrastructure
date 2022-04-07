@@ -56,6 +56,7 @@ resource "postgresql_database" "database" {
 
 output "user" {
   value = postgresql_role.user
+  sensitive = true
 }
 
 output "database" {
@@ -64,4 +65,5 @@ output "database" {
 
 output "password" {
   value = random_password.password
+  sensitive = true
 }

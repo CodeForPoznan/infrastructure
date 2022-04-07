@@ -48,5 +48,6 @@ resource "aws_acm_certificate_validation" "certificate_validation" {
 }
 
 output "certificate" {
-  value = aws_acm_certificate.certificate
+  value     = aws_acm_certificate.certificate
+  sensitive = true
 }
