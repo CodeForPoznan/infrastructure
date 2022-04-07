@@ -11,7 +11,7 @@ module dev_alinka_website_ssl_certificate {
   route53_zone = aws_route53_zone.alinka_website
 
   providers = {
-    aws.north_virginia = aws.north_virginia
+    aws = aws.north_virginia
   }
 }
 

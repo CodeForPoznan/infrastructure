@@ -38,7 +38,7 @@ module empatia_ssl_certificate {
   route53_zone = aws_route53_zone.empatia
 
   providers = {
-    aws.north_virginia = aws.north_virginia
+    aws = aws.north_virginia
   }
 }
 
