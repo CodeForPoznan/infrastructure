@@ -6,16 +6,16 @@ terraform {
     region  = "eu-west-1"
   }
 
-//  backend "local" {
-//    path = "./state.tfstate"
-//  }
+  # backend "local" {
+  #   path = "./state.tfstate"
+  # }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
+      version = "~> 2.70.1"
       # version = "~> 4.8.0"
       # version = "~> 2.36.0"
-      version = "~> 2.70.1"
     }
     random = {
       source  = "hashicorp/random"
@@ -26,7 +26,7 @@ terraform {
       version = "~> 2.1.2"
     }
     postgresql = {
-      source = "cyrilgdn/postgresql"
+      source  = "cyrilgdn/postgresql"
       version = "~> 1.15.0"
       # version = "~> 1.7.2"
     }
