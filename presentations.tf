@@ -1,10 +1,10 @@
-module presentations_user {
+module "presentations_user" {
   source = "./user"
 
   name = "presentations"
 }
 
-module presentations_ssl_certificate {
+module "presentations_ssl_certificate" {
   source = "./ssl_certificate"
 
   domain       = "slides.codeforpoznan.pl"
@@ -15,7 +15,7 @@ module presentations_ssl_certificate {
   }
 }
 
-module presentations_frontend_assets {
+module "presentations_frontend_assets" {
   source = "./frontend_assets"
 
   name      = "Presentations"
@@ -23,7 +23,7 @@ module presentations_frontend_assets {
   iam_user  = module.presentations_user.user
 }
 
-module presentations_cloudfront_distribution {
+module "presentations_cloudfront_distribution" {
   source = "./cloudfront_distribution"
 
   name            = "Presentations"

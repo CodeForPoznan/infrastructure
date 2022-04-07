@@ -1,4 +1,4 @@
-variable name {
+variable "name" {
   type = string
 }
 
@@ -15,6 +15,6 @@ output "user" {
 }
 
 output "access_key" {
-  value = aws_iam_access_key.access_key
+  value     = aws_iam_access_key.access_key
   sensitive = true
 }

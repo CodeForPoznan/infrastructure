@@ -1,10 +1,10 @@
-module dev_alinka_website_user {
+module "dev_alinka_website_user" {
   source = "./user"
 
   name = "dev_alinka_website"
 }
 
-module dev_alinka_website_ssl_certificate {
+module "dev_alinka_website_ssl_certificate" {
   source = "./ssl_certificate"
 
   domain       = "dev.alinka.io"
@@ -15,7 +15,7 @@ module dev_alinka_website_ssl_certificate {
   }
 }
 
-module dev_alinka_website_frontend_assets {
+module "dev_alinka_website_frontend_assets" {
   source = "./frontend_assets"
 
   name      = "dev_alinka_website"
@@ -23,7 +23,7 @@ module dev_alinka_website_frontend_assets {
   iam_user  = module.dev_alinka_website_user.user
 }
 
-module dev_alinka_website_cloudfront_distribution {
+module "dev_alinka_website_cloudfront_distribution" {
   source = "./cloudfront_distribution"
 
   name            = "dev_alinka_website"
