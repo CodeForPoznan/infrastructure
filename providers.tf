@@ -35,12 +35,12 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "codeforpoznan_awscli"
+  profile = "codeforpoznan"
 }
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "codeforpoznan_awscli"
+  profile = "codeforpoznan"
   alias   = "north_virginia"
 }
 
