@@ -30,17 +30,17 @@ terraform {
     }
   }
 
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.1.8"
 }
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "codeforpoznan"
+  profile = "codeforpoznan_awscli"
 }
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "codeforpoznan"
+  profile = "codeforpoznan_awscli"
   alias   = "north_virginia"
 }
 
