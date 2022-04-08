@@ -20,8 +20,8 @@ variable "timeout" {
   default = 15
 }
 variable "concurrency" {
-  type    = number
-  default = null
+  type        = number
+  default     = null
   description = "Reserved concurrency. Defaults to 3 or 5 based on var.name. If specified, it's value is used instead."
 }
 
@@ -95,7 +95,7 @@ resource "aws_s3_object" "object" {
 locals {
   # resource name starts with dev ?
   concurrency_based_on_name = can(regex("^dev_", var.name)) ? 3 : 5
-  concurrency = var.concurrency == null ? local.concurrency_based_on_name : var.concurrency
+  concurrency               = var.concurrency == null ? local.concurrency_based_on_name : var.concurrency
 }
 
 resource "aws_lambda_function" "function" {
